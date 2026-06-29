@@ -21,6 +21,7 @@ include { BAM_SV_VARIANT_CALLING            } from '../subworkflows/local/bam_sv
 include { BAM_CNV_VARIANT_CALLING           } from '../subworkflows/local/bam_cnv_variant_calling'
 include { REPEAT_CHARACTERIZATION           } from '../subworkflows/local/repeat_characterization'
 include { BAM_M6A_ADDNUCLEOSOMES_FIBERTOOLS } from '../subworkflows/local/bam_m6a_addnucleosomes_fibertools'
+include { VEP_POST_ANNOTATION               } from '../subworkflows/local/vep_post_annotation'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -214,6 +215,8 @@ workflow PACVAR {
                     vep_cache,
                     []
                 )
+
+                VEP_POST_ANNOTATION(VCF_ANNOTATE_ENSEMBLVEP_SNP.out.vcf_tbi)
             }
         }
 
