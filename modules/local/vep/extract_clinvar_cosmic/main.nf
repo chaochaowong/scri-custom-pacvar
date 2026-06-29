@@ -3,7 +3,9 @@ process VEP_EXTRACT_CLINVAR_COSMIC {
     label 'process_low'
 
     conda "${moduleDir}/environment.yml"
-    container 'python:3.12-slim'
+    container "${ workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/python:3.12.12':
+        'docker.io/library/python:3.12.12' }"
 
     input:
     tuple val(meta), path(vcf), path(tbi)
